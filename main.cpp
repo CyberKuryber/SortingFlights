@@ -34,15 +34,19 @@ void main()
 
 	loadFlights(in);
 	
-
-	SelectionSort ss = SelectionSort();
-	ss.sort(flights);
+	
+	/*SelectionSort ss = SelectionSort();
+	ss.sort(flights);*/
+	MergeSort ms = MergeSort();
+	ms.sort(flights);
 	cout << "WTF" << endl;
 
 }
 
 void loadFlights(ifstream& in)
 {
+	string line;
+	getline(in, line);
 	while (!in.eof())
 	{
 		int id;
@@ -50,7 +54,6 @@ void loadFlights(ifstream& in)
 		string surname;
 
 		string line;
-		getline(in, line);
 		getline(in, line);
 		vector<string> tokens;
 		size_t pos = 0;
