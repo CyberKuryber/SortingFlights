@@ -162,6 +162,7 @@
     <ClInclude Include="graph_lib\Simple_window.h" />
     <ClInclude Include="graph_lib\std_lib_facilities.h" />
     <ClInclude Include="graph_lib\Window.h" />
+    <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Sort.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
