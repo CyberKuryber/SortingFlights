@@ -14,14 +14,19 @@ private:
 	std::string gateNum;
 	std::string destination;
 	std::string flightNum;
-	time_t departureTime;
+	std::string departureTime;
+	static int sortingParameterArray[4];
+	static int sortingParameter;
+	static bool ascendingSort;
 
 public:
-	time_t getDepartureTime() const;
+	std::string getDepartureTime() const;
 	std::string getGateNum() const;
 	std::string getDestination() const;
 	std::string getFlightNum() const;
 	bool operator==(const Flight& flight);
 	bool operator<(const Flight& flight);
 	bool operator>(const Flight& flight);
+	void setSortingParameter(int p,int pos) const;
+
 };
