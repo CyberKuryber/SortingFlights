@@ -24,6 +24,7 @@ public:
 	unsigned long getNumCmps();
 	// resets the number of comparisons
 	void resetNumCmps();
+	virtual void primarySort(std::vector<Flight>& data, bool sortOrder) = 0;
 };
 
 // SelectionSort class
@@ -32,5 +33,6 @@ class SelectionSort : public Sort
 public:
 	// main entry point
 	void sort(std::vector<Flight>& data);
+	void primarySort(std::vector<Flight>& data, bool sortOrder);
 };
 

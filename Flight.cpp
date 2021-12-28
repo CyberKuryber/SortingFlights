@@ -13,10 +13,13 @@
 2 destination
 3 time*/
 
+int Flight::sortingParameter = 3;
+int Flight::sortingParameterArray[4] = { 3,2,1,0 };
+bool Flight::ascendingSort[4] = { false,false,false,false };
+Flight::Flight(std::string gate, std::string dest, std::string flight, std::string time):gateNum(gate),destination(dest),flightNum(flight),departureTime(time){}
 
 std::string Flight::getGateNum() const {
 	return this->gateNum;
-
 }
 std::string Flight::getDepartureTime() const {
 	return this->departureTime;
@@ -29,7 +32,7 @@ std::string Flight::getFlightNum() const {
 }
 
 bool Flight::operator==(const Flight& flight) {
-	switch (this->sortingParameter)
+	switch (Flight::sortingParameter)
 	{
 	case 0: {
 		return (this->gateNum.compare(flight.getGateNum()) == 0);
@@ -47,7 +50,7 @@ bool Flight::operator==(const Flight& flight) {
 }
 
 bool Flight::operator<(const Flight& flight) {
-	switch (this->sortingParameter)
+	switch (Flight::sortingParameter)
 	{
 	case 0: {
 		return (this->gateNum.compare(flight.getGateNum()) < 0);
@@ -66,7 +69,7 @@ bool Flight::operator<(const Flight& flight) {
 }
 
 bool Flight::operator>(const Flight& flight) {
-	switch (this->sortingParameter)
+	switch (Flight::sortingParameter)
 	{
 	case 0: {
 		return (this->gateNum.compare(flight.getGateNum()) > 0);
@@ -84,10 +87,3 @@ bool Flight::operator>(const Flight& flight) {
 	}
 }
 
-void Flight::setSortingParameter(int p, int pos) const {
-	if (pos<0 || pos>3)
-	{
-		return;
-	}
-	this->sortingParameterArray[pos] = p;
-}

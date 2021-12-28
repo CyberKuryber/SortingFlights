@@ -15,11 +15,10 @@ private:
 	std::string destination;
 	std::string flightNum;
 	std::string departureTime;
-	static int sortingParameterArray[4];
-	static int sortingParameter;
-	static bool ascendingSort;
+
 
 public:
+	Flight(std::string gate, std::string dest, std::string flight, std::string time);
 	std::string getDepartureTime() const;
 	std::string getGateNum() const;
 	std::string getDestination() const;
@@ -27,6 +26,8 @@ public:
 	bool operator==(const Flight& flight);
 	bool operator<(const Flight& flight);
 	bool operator>(const Flight& flight);
-	void setSortingParameter(int p,int pos) const;
+	static int sortingParameterArray[4];
+	static int sortingParameter;
+	static bool ascendingSort[4];
 
 };
