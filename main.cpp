@@ -14,6 +14,7 @@
 #include <regex>
 #include "Flight.h"
 #include "Sort.h"
+#include "MainWindow.h"
 
 using namespace std;
 
@@ -24,8 +25,10 @@ vector<Flight> flights;
 
 void main()
 {
+	MainWindow mainWindow(Point(50, 50),WINDOW_W, WINDOW_H,"Sort Flights");
+	
 
-	ifstream in("../inputFileExample.txt");
+	/*ifstream in("../inputFileExample.txt");
 	if (!in)
 	{
 		cerr << "ERROR: wrong input file name!";
@@ -36,9 +39,9 @@ void main()
 	
 	
 	/*SelectionSort ss = SelectionSort();
-	ss.sort(flights);*/
+	ss.sort(flights);
 	MergeSort ms = MergeSort();
-	ms.sort(flights);
+	ms.sort(flights);*/
 	cout << "WTF" << endl;
 
 }
