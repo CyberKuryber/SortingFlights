@@ -50,13 +50,16 @@ private:
 	bool selectionPushed;
 	bool mergePushed;
 
+
+
 	static void cb_selectionSort(Address, Address);
 	static void cb_mergeSort(Address, Address);
 	void mergeSortRun();
 	void selectionSortRun();
 	void loadFLights();
 	void loopWindow();
-	
+	void createParameters();
+	void generateOutput(string path);
 
 	In_box outputFileInput;
 	In_box inputFileInput;

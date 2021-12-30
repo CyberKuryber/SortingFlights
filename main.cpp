@@ -18,8 +18,8 @@
 
 using namespace std;
 
-void loadFlights(ifstream& in);
-vector<Flight> flights;
+//void loadFlights(ifstream& in);
+//vector<Flight> flights;
 
 
 
@@ -46,7 +46,7 @@ void main()
 
 }
 
-void loadFlights(ifstream& in)
+/*void loadFlights(ifstream& in)
 {
 	string line;
 	getline(in, line);
@@ -77,4 +77,4 @@ void loadFlights(ifstream& in)
 		flights.push_back(Flight(tokens[3], tokens[0], tokens[2], tokens[1]));
 
 	}
-}
+}*/

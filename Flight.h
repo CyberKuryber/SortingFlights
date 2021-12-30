@@ -29,5 +29,6 @@ public:
 	static int sortingParameterArray[4];
 	static int sortingParameter;
 	static bool ascendingSort[4];
+	std::string toString();
 
 };
