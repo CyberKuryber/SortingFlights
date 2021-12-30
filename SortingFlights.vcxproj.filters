@@ -42,6 +42,9 @@
     <ClCompile Include="MainWindow.cpp">
       <Filter>graph_lib</Filter>
     </ClCompile>
+    <ClCompile Include="DrawingWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Flight.h">
@@ -69,6 +72,9 @@
       <Filter>graph_lib</Filter>
     </ClInclude>
     <ClInclude Include="MainWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawingWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

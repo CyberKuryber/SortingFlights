@@ -1,15 +1,15 @@
 //============================================================================
 // Name        : Sort.h
-// Author      : 
+// Author      :
 // Date        :
-// Copyright   : 
+// Copyright   :
 // Description : Sort interface class and various sorting algorithms in C++
 //============================================================================
 #pragma once
 
+#include "DrawingWindow.h"
 #include "Flight.h"
 #include <vector>
-
 
 // Sort class
 class Sort
@@ -33,15 +33,14 @@ class SelectionSort : public Sort
 public:
 	// main entry point
 	void sort(std::vector<Flight>& data);
-	void primarySort(std::vector<Flight>& data, bool sortOrder);
+	void primarySort(std::vector<Flight>& data, bool sortOrder, DrawingWindow& dw);
 };
 
 class MergeSort : public Sort {
 public:
 	void sort(std::vector<Flight>& data);
-	std::vector<Flight> primarySort(std::vector<Flight>& data, bool sortOrder);
-	std::vector<Flight> merge(std::vector<Flight>&left, std::vector<Flight>&right, bool sortOrder);
+	std::vector<Flight> primarySort(std::vector<Flight>& data, bool sortOrder, DrawingWindow& dw);
+	std::vector<Flight> merge(std::vector<Flight>& left, std::vector<Flight>& right, bool sortOrder);
 	std::vector<Flight> findLeft(std::vector<Flight>& data, int mid);
 	std::vector<Flight> findRight(std::vector<Flight>& data, int mid);
 };
-

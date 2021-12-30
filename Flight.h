@@ -16,7 +16,6 @@ private:
 	std::string flightNum;
 	std::string departureTime;
 
-
 public:
 	Flight(std::string gate, std::string dest, std::string flight, std::string time);
 	std::string getDepartureTime() const;
@@ -30,5 +29,4 @@ public:
 	static int sortingParameter;
 	static bool ascendingSort[4];
 	std::string toString();
-
 };

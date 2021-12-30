@@ -1,8 +1,8 @@
 //============================================================================
 // Name        : Flight.cpp
-// Author      : 
+// Author      :
 // Date        :
-// Copyright   : 
+// Copyright   :
 // Description : Implementation of the Flight class
 //============================================================================
 
@@ -16,7 +16,7 @@
 int Flight::sortingParameter = 3;
 int Flight::sortingParameterArray[4] = { 3,2,1,0 };
 bool Flight::ascendingSort[4] = { false,false,false,false };
-Flight::Flight(std::string gate, std::string dest, std::string flight, std::string time):gateNum(gate),destination(dest),flightNum(flight),departureTime(time){}
+Flight::Flight(std::string gate, std::string dest, std::string flight, std::string time) :gateNum(gate), destination(dest), flightNum(flight), departureTime(time) {}
 
 std::string Flight::getGateNum() const {
 	return this->gateNum;
@@ -27,7 +27,7 @@ std::string Flight::getDepartureTime() const {
 std::string Flight::getDestination() const {
 	return this->destination;
 }
-std::string Flight::getFlightNum() const {
+std::string Flight::getFlightNum() const{
 	return this->flightNum;
 }
 
@@ -60,11 +60,10 @@ bool Flight::operator<(const Flight& flight) {
 	}
 	case 2: {
 		return (this->destination.compare(flight.getDestination()) < 0);
-		
 	}
 	default: {
 		return (this->departureTime.compare(flight.getDepartureTime()) < 0);
-		}
+	}
 	}
 }
 
@@ -79,7 +78,6 @@ bool Flight::operator>(const Flight& flight) {
 	}
 	case 2: {
 		return (this->destination.compare(flight.getDestination()) > 0);
-
 	}
 	default: {
 		return (this->departureTime.compare(flight.getDepartureTime()) > 0);
@@ -90,4 +88,3 @@ bool Flight::operator>(const Flight& flight) {
 std::string Flight::toString() {
 	return this->destination + ";" + this->departureTime + ";" + this->flightNum + ";" + this->gateNum;
 }
-

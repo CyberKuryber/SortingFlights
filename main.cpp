@@ -21,12 +21,10 @@ using namespace std;
 //void loadFlights(ifstream& in);
 //vector<Flight> flights;
 
-
-
 void main()
 {
-	MainWindow mainWindow(Point(50, 50),WINDOW_W, WINDOW_H,"Sort Flights");
 	
+	MainWindow mainWindow(Point(50, 50), WINDOW_W, WINDOW_H, "Sort Flights");
 
 	/*ifstream in("../inputFileExample.txt");
 	if (!in)
@@ -36,14 +34,12 @@ void main()
 	}
 
 	loadFlights(in);
-	
-	
+
 	/*SelectionSort ss = SelectionSort();
 	ss.sort(flights);
 	MergeSort ms = MergeSort();
 	ms.sort(flights);*/
 	cout << "WTF" << endl;
-
 }
 
 /*void loadFlights(ifstream& in)
@@ -63,18 +59,13 @@ void main()
 		string delimiter = ";";
 		string token;
 
-
 		while ((pos = line.find(delimiter)) != std::string::npos) {
 			token = line.substr(0, pos);
 			token = std::regex_replace(token, std::regex("\\i"), "");
 			tokens.push_back(token);
 			line.erase(0, pos + delimiter.length());
-
 		}
-		
-		
 
 		flights.push_back(Flight(tokens[3], tokens[0], tokens[2], tokens[1]));
-
 	}
 }*/

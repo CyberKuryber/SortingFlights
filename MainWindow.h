@@ -31,9 +31,7 @@
 #define GENERAL_H_W			50
 #define GENERAL_X			100
 
-
 using namespace Graph_lib;
-
 
 class MainWindow : public Window
 {
@@ -43,14 +41,11 @@ public:
 private:
 	vector<Flight> flights;
 
-	
 	Button selectionSortButton;
 	Button mergeSortButton;
 
 	bool selectionPushed;
 	bool mergePushed;
-
-
 
 	static void cb_selectionSort(Address, Address);
 	static void cb_mergeSort(Address, Address);
@@ -63,7 +58,7 @@ private:
 
 	In_box outputFileInput;
 	In_box inputFileInput;
-	
+
 	In_box timePriorityTextBox;
 	In_box timeAscendingTextBox;
 
@@ -75,6 +70,4 @@ private:
 
 	In_box flightNumPriorityTextBox;
 	In_box flightNumAscendingTextBox;
-
 };
-
