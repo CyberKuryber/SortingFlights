@@ -13,7 +13,7 @@ class Flight
 private:
 	std::string gateNum;
 	std::string destination;
-	std::string flightNum;
+	
 	std::string departureTime;
 
 public:
@@ -29,4 +29,5 @@ public:
 	static int sortingParameter;
 	static bool ascendingSort[4];
 	std::string toString();
+	std::string flightNum;
 };

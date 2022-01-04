@@ -7,6 +7,7 @@
 #include "Flight.h"
 #include <vector>
 #include <iostream>
+#include "FL/Fl_Output.H"
 
 #define WINDOW_W			800
 #define WINDOW_H			550
@@ -31,9 +32,11 @@ public:
 	DrawingWindow(Point xy, int w, int h, const string& title);
 	void addElements(vector<Flight>& f);
 	void generateGap();
+	void drawOuts();
 	void loopWindow();
 
 private:
 	int currentX;
 	int currentY;
+	vector<Out_box*>  outs;
 };

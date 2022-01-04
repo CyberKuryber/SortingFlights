@@ -3,15 +3,24 @@
 void DrawingWindow::addElements(vector<Flight>& f) {
 	vector<Flight>::iterator it;
 
-	for (it = f.begin(); it != f.end(); it++)
+	for (int i = 0; i < f.size(); i++)
 	{
-		string s = (*it).getFlightNum();
-		Button current(Point(currentX, currentY), GENERAL_W, GENERAL_H, s.c_str(), NULL);
-		this->attach(current);
-		this->currentX += GENERAL_W;
+
+		//Out_box current(Point(currentX, currentY), 0, GENERAL_H, f[i].getFlightNum());
+		this->outs.push_back(new Out_box(Point(currentX, currentY), 0, GENERAL_H, f[i].getFlightNum()));
+		this->currentX += GENERAL_X;
 	}
 	this->currentX = GENERAL_X;
 	this->currentY += GENERAL_H;
+}
+
+void DrawingWindow::drawOuts() {
+	for (int i = 0; i < this->outs.size(); i++)
+	{
+		this->attach(*(this->outs[i]));
+		
+	}
+	this->outs.clear();
 }
 
 DrawingWindow::DrawingWindow(Point xy, int w, int h, const string& title) :

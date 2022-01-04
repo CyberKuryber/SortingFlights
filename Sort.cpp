@@ -38,6 +38,7 @@ void SelectionSort::primarySort(std::vector<Flight>& data, bool sortOrder, Drawi
 			data[i] = min;
 			data[minIndex] = hlp;
 			dw.addElements(data);
+			dw.drawOuts();
 		}
 	}
 	else
@@ -191,8 +192,10 @@ std::vector<Flight> MergeSort::primarySort(std::vector<Flight>& data, bool sortO
 	std::vector<Flight> left = this->findLeft(data, mid);
 	std::vector<Flight> right = this->findRight(data, mid);
 	dw.addElements(left);
+	dw.drawOuts();
 	dw.generateGap();
 	dw.addElements(right);
+	dw.drawOuts();
 	left = primarySort(left, sortOrder, dw);
 	right = primarySort(right, sortOrder, dw);
 
