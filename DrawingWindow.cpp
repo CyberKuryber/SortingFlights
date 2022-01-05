@@ -5,12 +5,10 @@ void DrawingWindow::addElements(vector<Flight>& f) {
 
 	for (int i = 0; i < f.size(); i++)
 	{
-
 		//Out_box current(Point(currentX, currentY), 0, GENERAL_H, f[i].getFlightNum());
 		this->outs.push_back(new Out_box(Point(currentX, currentY), 0, GENERAL_H, f[i].getFlightNum()));
 		this->currentX += GENERAL_X;
 	}
-
 }
 
 void DrawingWindow::newRow() {
@@ -22,7 +20,6 @@ void DrawingWindow::drawOuts() {
 	for (int i = 0; i < this->outs.size(); i++)
 	{
 		this->attach(*(this->outs[i]));
-		
 	}
 	this->outs.clear();
 }
@@ -38,9 +35,9 @@ DrawingWindow::DrawingWindow(Point xy, int w, int h, const string& title) :
 		BUTTON_H,
 		"Exit",
 		cb_exit)
-	{
+{
 	attach(exitButton);
-	}
+}
 
 void DrawingWindow::cb_exit(Address, Address pw)
 {
@@ -61,4 +58,3 @@ void DrawingWindow::generateGap() {
 	this->outs.push_back(new Out_box(Point(currentX, currentY), 0, GENERAL_H, "\t|"));
 	this->drawOuts();
 }
-

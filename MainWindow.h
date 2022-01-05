@@ -37,6 +37,11 @@ class MainWindow : public Window
 {
 public:
 	MainWindow(Point xy, int w, int h, const string& title);
+	void loadFLights(string path);
+	void quickSortRun(bool inside);
+	void selectionSortRun(bool inside);
+	void createParameters(char* pr[], char* asc[]);
+	void generateOutput(string path);
 
 private:
 	vector<Flight> flights;
@@ -49,8 +54,6 @@ private:
 
 	static void cb_selectionSort(Address, Address);
 	static void cb_quickSort(Address, Address);
-	void quickSortRun();
-	void selectionSortRun();
 	void loadFLights();
 	void loopWindow();
 	void createParameters();

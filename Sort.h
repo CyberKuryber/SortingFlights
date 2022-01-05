@@ -43,7 +43,6 @@ public:
 	void primarySort(std::vector<Flight>& data, bool sortOrder, int first, int last, DrawingWindow& dw);
 	int partition(std::vector<Flight>& data, bool sortOrder, int first, int last);
 	int rpartition(std::vector<Flight>& data, bool sortOrder, int first, int last);
-
 };
 
 /*
@@ -55,4 +54,3 @@ public:
 	std::vector<Flight> findLeft(std::vector<Flight>& data, int mid);
 	std::vector<Flight> findRight(std::vector<Flight>& data, int mid);
 };*/
-

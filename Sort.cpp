@@ -63,8 +63,6 @@ void SelectionSort::primarySort(std::vector<Flight>& data, bool sortOrder, Drawi
 			}
 		}
 	}
-
-
 }
 
 void SelectionSort::sort(std::vector<Flight>& data) {
@@ -191,11 +189,11 @@ std::vector<Flight> MergeSort::merge(std::vector<Flight>& left, std::vector<Flig
 
 std::vector<Flight> MergeSort::primarySort(std::vector<Flight>& data, bool sortOrder, DrawingWindow& dw) {
 	int n = data.size();
-	if (n == 1) { 
+	if (n == 1) {
 		dw.addElements(data);
 		dw.drawOuts();
 		dw.generateGap();
-		return data; 
+		return data;
 	}
 	dw.newRow();
 	int	mid = n / 2;
@@ -206,7 +204,7 @@ std::vector<Flight> MergeSort::primarySort(std::vector<Flight>& data, bool sortO
 	dw.generateGap();
 	dw.addElements(right);
 	dw.drawOuts();
-	
+
 	left = primarySort(left, sortOrder, dw);
 	right = primarySort(right, sortOrder, dw);
 
@@ -267,9 +265,6 @@ void MergeSort::sort(std::vector<Flight>& data) {
 }
 */
 
-
-
-
 void QuickSort::sort(std::vector<Flight>& data) {
 	this->resetNumCmps();
 	Flight::sortingParameter = Flight::sortingParameterArray[0];
@@ -280,7 +275,7 @@ void QuickSort::sort(std::vector<Flight>& data) {
 
 	DrawingWindow dw(Point(50, 50), WINDOW_W, WINDOW_H, "Drawing");
 
-	this->primarySort(data, Flight::ascendingSort[0],0,data.size()-1, dw);
+	this->primarySort(data, Flight::ascendingSort[0], 0, data.size() - 1, dw);
 
 	for (int i = 1; i < sizeof(Flight::sortingParameterArray) / sizeof(Flight::sortingParameterArray[0]); i++)
 	{
@@ -310,7 +305,7 @@ void QuickSort::sort(std::vector<Flight>& data) {
 		int dataCounter = 0;
 		for (int j = 0; j < toSort.size(); j++) {
 			if (toSort[j].size() > 1)
-				primarySort(toSort[j], Flight::ascendingSort[i],0,toSort[j].size()-1, dw);
+				primarySort(toSort[j], Flight::ascendingSort[i], 0, toSort[j].size() - 1, dw);
 			for (int k = 0; k < toSort[j].size(); k++)
 			{
 				data[dataCounter] = toSort[j][k];
@@ -324,10 +319,7 @@ void QuickSort::sort(std::vector<Flight>& data) {
 		current.clear();
 		toSort.clear();
 	}
-
-
 }
-
 
 void swap(Flight* a, Flight* b)
 {
@@ -335,7 +327,6 @@ void swap(Flight* a, Flight* b)
 	*a = *b;
 	*b = t;
 }
-
 
 void QuickSort::primarySort(std::vector<Flight>& data, bool sortOrder, int first, int last, DrawingWindow& dw) {
 	if (first < (last - 1))
@@ -348,14 +339,11 @@ void QuickSort::primarySort(std::vector<Flight>& data, bool sortOrder, int first
 		dw.drawOuts();
 		dw.newRow();
 		primarySort(data, sortOrder, first, index, dw);
-		primarySort(data, sortOrder, index+1, last, dw);
+		primarySort(data, sortOrder, index + 1, last, dw);
 	}
-
 }
 
 int  QuickSort::partition(std::vector<Flight>& data, bool sortOrder, int first, int last) {
-
-
 	Flight pivot = data[last];
 
 	int i = first - 1;
@@ -377,7 +365,6 @@ int  QuickSort::partition(std::vector<Flight>& data, bool sortOrder, int first, 
 				swap(data[i], data[j]);
 			}
 		}
-		
 	}
 
 	swap(data[++i], data[last]);

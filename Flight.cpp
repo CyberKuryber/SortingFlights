@@ -27,7 +27,7 @@ std::string Flight::getDepartureTime() const {
 std::string Flight::getDestination() const {
 	return this->destination;
 }
-std::string Flight::getFlightNum() const{
+std::string Flight::getFlightNum() const {
 	return this->flightNum;
 }
 

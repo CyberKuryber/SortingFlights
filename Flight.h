@@ -13,7 +13,7 @@ class Flight
 private:
 	std::string gateNum;
 	std::string destination;
-	
+
 	std::string departureTime;
 
 public:
