@@ -151,7 +151,10 @@ void MainWindow::selectionSortRun() {
 	SelectionSort ss = SelectionSort();
 	ss.resetNumCmps();
 	ss.sort(flights);
-	this->generateOutput(outputFileInput.get_string());
+	
+	this->generateOutput();
+	
+	
 }
 
 void MainWindow::quickSortRun() {
@@ -159,7 +162,9 @@ void MainWindow::quickSortRun() {
 	loadFLights();
 	QuickSort qs = QuickSort();
 	qs.sort(flights);
-	this->generateOutput(outputFileInput.get_string());
+	
+	this->generateOutput();
+	
 }
 
 void MainWindow::loopWindow() {
@@ -188,11 +193,43 @@ void MainWindow::createParameters() {
 	vector<std::string> priority;
 	vector<bool> ascending;
 	vector<int> codedPriority;
+	if (gateNumPriorityTextBox.get_string().empty())
+	{
+		priority.push_back("1");
+	}
+	else
+	{
+		priority.push_back(gateNumPriorityTextBox.get_string());
+	}
+	if (flightNumPriorityTextBox.get_string().empty())
+	{
+		priority.push_back("1");
+	}
+	else 
+	{
+		priority.push_back(flightNumPriorityTextBox.get_string());
+	}
 
-	priority.push_back(gateNumPriorityTextBox.get_string());
-	priority.push_back(flightNumPriorityTextBox.get_string());
-	priority.push_back(destinationPriorityTextBox.get_string());
-	priority.push_back(timePriorityTextBox.get_string());
+	if (destinationPriorityTextBox.get_string().empty())
+	{
+		priority.push_back("1");
+	}
+	else
+	{
+		priority.push_back(destinationPriorityTextBox.get_string());
+	}
+	
+	if (timePriorityTextBox.get_string().empty())
+	{
+		priority.push_back("0");
+	}
+	else
+	{
+		priority.push_back(timePriorityTextBox.get_string());
+	}
+	
+	
+	
 	for (int i = 0; i < 4; i++)
 	{
 		codedPriority.push_back(i);
@@ -258,8 +295,13 @@ void MainWindow::createParameters() {
 	}
 }
 
-void MainWindow::generateOutput(string path) {
-	ofstream out(path);
+void MainWindow::generateOutput() {
+	if (outputFileInput.get_string().empty())
+	{
+		return;
+	}
+
+	ofstream out(outputFileInput.get_string());
 	vector<Flight>::iterator it;
 	for (it = flights.begin(); it != flights.end(); it++)
 	{

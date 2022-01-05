@@ -41,8 +41,8 @@ class QuickSort : public Sort
 public:
 	void sort(std::vector<Flight>& data);
 	void primarySort(std::vector<Flight>& data, bool sortOrder, int first, int last, DrawingWindow& dw);
-	int partition(std::vector<Flight>& data, int first, int last);
-	int rpartition(std::vector<Flight>& data, int first, int last);
+	int partition(std::vector<Flight>& data, bool sortOrder, int first, int last);
+	int rpartition(std::vector<Flight>& data, bool sortOrder, int first, int last);
 
 };
 

@@ -54,7 +54,7 @@ private:
 	void loadFLights();
 	void loopWindow();
 	void createParameters();
-	void generateOutput(string path);
+	void generateOutput();
 
 	In_box outputFileInput;
 	In_box inputFileInput;

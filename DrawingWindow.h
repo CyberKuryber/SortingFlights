@@ -39,5 +39,9 @@ public:
 private:
 	int currentX;
 	int currentY;
+	bool exitButtonPushed;
 	vector<Out_box*>  outs;
+	Button exitButton;
+	static void cb_exit(Address, Address);
+	void exitButtonRun();
 };

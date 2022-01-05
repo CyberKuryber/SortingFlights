@@ -340,7 +340,7 @@ void swap(Flight* a, Flight* b)
 void QuickSort::primarySort(std::vector<Flight>& data, bool sortOrder, int first, int last, DrawingWindow& dw) {
 	if (first < (last - 1))
 	{
-		int index = this->rpartition(data, first, last);
+		int index = this->rpartition(data, sortOrder, first, last);
 		/*cout << first << endl;
 		cout << last << endl;
 		cout << index << endl;*/
@@ -353,7 +353,8 @@ void QuickSort::primarySort(std::vector<Flight>& data, bool sortOrder, int first
 
 }
 
-int  QuickSort::partition(std::vector<Flight>& data, int first, int last) {
+int  QuickSort::partition(std::vector<Flight>& data, bool sortOrder, int first, int last) {
+
 
 	Flight pivot = data[last];
 
@@ -361,21 +362,32 @@ int  QuickSort::partition(std::vector<Flight>& data, int first, int last) {
 
 	for (int j = first; j < last; j++)
 	{
-		if (data[j]<pivot)
+		if (sortOrder)
 		{
-			i++;
-			swap(data[i], data[j]);
+			if (data[j] < pivot)
+			{
+				i++;
+				swap(data[i], data[j]);
+			}
 		}
+		else {
+			if (data[j] > pivot)
+			{
+				i++;
+				swap(data[i], data[j]);
+			}
+		}
+		
 	}
 
 	swap(data[++i], data[last]);
 	return i;
 }
 
-int  QuickSort::rpartition(std::vector<Flight>& data, int first, int last) {
+int  QuickSort::rpartition(std::vector<Flight>& data, bool sortOrder, int first, int last) {
 	srand(time(NULL));
 	int i = rand();
 	i = first + (i % (last - first));
 	swap(data[i], data[last]);
-	return this->partition(data, first, last);
+	return this->partition(data, sortOrder, first, last);
 }
