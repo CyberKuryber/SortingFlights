@@ -9,12 +9,12 @@ MainWindow::MainWindow(Point xy, int w, int h, const string& title) :
 		BUTTON_H,
 		"Selection Sort",
 		cb_selectionSort),
-	mergeSortButton(
+	quickSortButton(
 		Point(GENERAL_H_W + GENERAL_H_W * 5, 9 * GENERAL_H_W),
 		BUTTON_W,
 		BUTTON_H,
-		"Merge Sort",
-		cb_mergeSort),
+		"Quick Sort",
+		cb_quickSort),
 	inputFileInput(
 		Point(GENERAL_X, GENERAL_H_W),
 		FILEINPUT_W,
@@ -44,7 +44,7 @@ MainWindow::MainWindow(Point xy, int w, int h, const string& title) :
 		Point(GENERAL_X + 8 * GENERAL_H_W, GENERAL_H_W * 5),
 		GENERAL_H_W,
 		GENERAL_H_W,
-		"Flight Priority"
+		"Destination Priority"
 	),
 
 	timePriorityTextBox(
@@ -69,7 +69,7 @@ MainWindow::MainWindow(Point xy, int w, int h, const string& title) :
 		Point(GENERAL_X + 8 * GENERAL_H_W, GENERAL_H_W * 7),
 		GENERAL_H_W,
 		GENERAL_H_W,
-		"Flight Ascending"
+		"Destination Ascending"
 	),
 
 	timeAscendingTextBox(
@@ -78,12 +78,12 @@ MainWindow::MainWindow(Point xy, int w, int h, const string& title) :
 		GENERAL_H_W,
 		"Time Ascending"
 	),
-	mergePushed(false),
+	quickPushed(false),
 	selectionPushed(false)
 
 {
 	attach(selectionSortButton);
-	attach(mergeSortButton);
+	attach(quickSortButton);
 	attach(outputFileInput);
 	attach(inputFileInput);
 	attach(timePriorityTextBox);
@@ -103,9 +103,9 @@ void MainWindow::cb_selectionSort(Address, Address pw)
 	reference_to<MainWindow>(pw).selectionSortRun();
 }
 
-void MainWindow::cb_mergeSort(Address, Address pw)
+void MainWindow::cb_quickSort(Address, Address pw)
 {
-	reference_to<MainWindow>(pw).mergeSortRun();
+	reference_to<MainWindow>(pw).quickSortRun();
 }
 
 void MainWindow::loadFLights() {
@@ -154,11 +154,11 @@ void MainWindow::selectionSortRun() {
 	this->generateOutput(outputFileInput.get_string());
 }
 
-void MainWindow::mergeSortRun() {
+void MainWindow::quickSortRun() {
 	createParameters();
 	loadFLights();
-	MergeSort ms = MergeSort();
-	ms.sort(flights);
+	QuickSort qs = QuickSort();
+	qs.sort(flights);
 	this->generateOutput(outputFileInput.get_string());
 }
 
@@ -166,14 +166,14 @@ void MainWindow::loopWindow() {
 	show();
 	while (true)
 	{
-		while (!selectionPushed && !mergePushed) Fl::wait();
+		while (!selectionPushed && !quickPushed) Fl::wait();
 
 		if (selectionPushed)
 		{
 			selectionSortRun();
 		}
 		else {
-			mergeSortRun();
+			quickSortRun();
 		}
 	}
 }

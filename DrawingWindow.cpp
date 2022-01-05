@@ -10,6 +10,10 @@ void DrawingWindow::addElements(vector<Flight>& f) {
 		this->outs.push_back(new Out_box(Point(currentX, currentY), 0, GENERAL_H, f[i].getFlightNum()));
 		this->currentX += GENERAL_X;
 	}
+
+}
+
+void DrawingWindow::newRow() {
 	this->currentX = GENERAL_X;
 	this->currentY += GENERAL_H;
 }
@@ -31,7 +35,8 @@ DrawingWindow::DrawingWindow(Point xy, int w, int h, const string& title) :
 	}
 
 void DrawingWindow::generateGap() {
-	this->currentY += GENERAL_H;
+	this->outs.push_back(new Out_box(Point(currentX, currentY), 0, GENERAL_H, "\t|"));
+	this->drawOuts();
 }
 
 void DrawingWindow::loopWindow() {

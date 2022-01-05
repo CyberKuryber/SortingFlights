@@ -39,6 +39,7 @@ void SelectionSort::primarySort(std::vector<Flight>& data, bool sortOrder, Drawi
 			data[minIndex] = hlp;
 			dw.addElements(data);
 			dw.drawOuts();
+			dw.newRow();
 		}
 	}
 	else
@@ -62,6 +63,8 @@ void SelectionSort::primarySort(std::vector<Flight>& data, bool sortOrder, Drawi
 			}
 		}
 	}
+
+
 }
 
 void SelectionSort::sort(std::vector<Flight>& data) {
@@ -112,6 +115,8 @@ void SelectionSort::sort(std::vector<Flight>& data) {
 			}
 		}
 
+		dw.addElements(data);
+		dw.drawOuts();
 		dw.loopWindow();
 		current.clear();
 		toSort.clear();
@@ -119,7 +124,7 @@ void SelectionSort::sort(std::vector<Flight>& data) {
 }
 
 //Merge Sort
-
+/*
 std::vector<Flight> MergeSort::findLeft(std::vector<Flight>& data, int mid) {
 	std::vector<Flight> left;
 	for (int i = 0; i < mid; i++)
@@ -186,8 +191,13 @@ std::vector<Flight> MergeSort::merge(std::vector<Flight>& left, std::vector<Flig
 
 std::vector<Flight> MergeSort::primarySort(std::vector<Flight>& data, bool sortOrder, DrawingWindow& dw) {
 	int n = data.size();
-	if (n == 1)return data;
-
+	if (n == 1) { 
+		dw.addElements(data);
+		dw.drawOuts();
+		dw.generateGap();
+		return data; 
+	}
+	dw.newRow();
 	int	mid = n / 2;
 	std::vector<Flight> left = this->findLeft(data, mid);
 	std::vector<Flight> right = this->findRight(data, mid);
@@ -196,6 +206,7 @@ std::vector<Flight> MergeSort::primarySort(std::vector<Flight>& data, bool sortO
 	dw.generateGap();
 	dw.addElements(right);
 	dw.drawOuts();
+	
 	left = primarySort(left, sortOrder, dw);
 	right = primarySort(right, sortOrder, dw);
 
@@ -253,4 +264,118 @@ void MergeSort::sort(std::vector<Flight>& data) {
 		current.clear();
 		toSort.clear();
 	}
+}
+*/
+
+
+
+
+void QuickSort::sort(std::vector<Flight>& data) {
+	this->resetNumCmps();
+	Flight::sortingParameter = Flight::sortingParameterArray[0];
+	if (Flight::sortingParameter == -1)
+	{
+		return;
+	}
+
+	DrawingWindow dw(Point(50, 50), WINDOW_W, WINDOW_H, "Drawing");
+
+	this->primarySort(data, Flight::ascendingSort[0],0,data.size()-1, dw);
+
+	for (int i = 1; i < sizeof(Flight::sortingParameterArray) / sizeof(Flight::sortingParameterArray[0]); i++)
+	{
+		std::vector<std::vector<Flight>> toSort;
+		std::vector<Flight> current;
+		for (int j = 0; j < data.size() - 1; j++)
+		{
+			current.push_back(data[j]);
+			if (!(data[j] == data[j + 1])) {
+				toSort.push_back(current);
+				current.clear();
+			}
+		}
+		if (!current.empty())
+		{
+			toSort.push_back(current);
+		}
+		if (toSort[toSort.size() - 1][0] == data[data.size() - 1])
+		{
+			toSort[toSort.size() - 1].push_back(data[data.size() - 1]);
+		}
+		else
+		{
+			current.push_back(data[data.size() - 1]);
+		}
+		Flight::sortingParameter = Flight::sortingParameterArray[i];
+		int dataCounter = 0;
+		for (int j = 0; j < toSort.size(); j++) {
+			if (toSort[j].size() > 1)
+				primarySort(toSort[j], Flight::ascendingSort[i],0,toSort[j].size()-1, dw);
+			for (int k = 0; k < toSort[j].size(); k++)
+			{
+				data[dataCounter] = toSort[j][k];
+				dataCounter++;
+			}
+		}
+
+		dw.addElements(data);
+		dw.drawOuts();
+		dw.loopWindow();
+		current.clear();
+		toSort.clear();
+	}
+
+
+}
+
+
+void swap(Flight* a, Flight* b)
+{
+	Flight t = *a;
+	*a = *b;
+	*b = t;
+}
+
+
+void QuickSort::primarySort(std::vector<Flight>& data, bool sortOrder, int first, int last, DrawingWindow& dw) {
+	if (first < (last - 1))
+	{
+		int index = this->rpartition(data, first, last);
+		/*cout << first << endl;
+		cout << last << endl;
+		cout << index << endl;*/
+		dw.addElements(data);
+		dw.drawOuts();
+		dw.newRow();
+		primarySort(data, sortOrder, first, index, dw);
+		primarySort(data, sortOrder, index+1, last, dw);
+	}
+
+}
+
+int  QuickSort::partition(std::vector<Flight>& data, int first, int last) {
+
+	Flight pivot = data[last];
+
+	int i = first - 1;
+
+	for (int j = first; j < last; j++)
+	{
+		if (data[j]<pivot)
+		{
+			i++;
+			swap(data[i], data[j]);
+		}
+	}
+
+	swap(data[++i], data[last]);
+	return i;
+}
+
+int  QuickSort::rpartition(std::vector<Flight>& data, int first, int last) {
+	srand(time(NULL));
+	int i = rand();
+	i = first + (i % (last - first));
+	swap(data[i], data[last]);
+	return this->partition(data, first, last);
 }

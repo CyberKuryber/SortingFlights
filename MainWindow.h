@@ -42,14 +42,14 @@ private:
 	vector<Flight> flights;
 
 	Button selectionSortButton;
-	Button mergeSortButton;
+	Button quickSortButton;
 
 	bool selectionPushed;
-	bool mergePushed;
+	bool quickPushed;
 
 	static void cb_selectionSort(Address, Address);
-	static void cb_mergeSort(Address, Address);
-	void mergeSortRun();
+	static void cb_quickSort(Address, Address);
+	void quickSortRun();
 	void selectionSortRun();
 	void loadFLights();
 	void loopWindow();

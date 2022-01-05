@@ -9,7 +9,7 @@
 #include <iostream>
 #include "FL/Fl_Output.H"
 
-#define WINDOW_W			800
+#define WINDOW_W			1200
 #define WINDOW_H			550
 #define HOR_OFFSET			20
 #define VER_OFFSET			20
@@ -34,6 +34,7 @@ public:
 	void generateGap();
 	void drawOuts();
 	void loopWindow();
+	void newRow();
 
 private:
 	int currentX;

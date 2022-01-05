@@ -36,6 +36,17 @@ public:
 	void primarySort(std::vector<Flight>& data, bool sortOrder, DrawingWindow& dw);
 };
 
+class QuickSort : public Sort
+{
+public:
+	void sort(std::vector<Flight>& data);
+	void primarySort(std::vector<Flight>& data, bool sortOrder, int first, int last, DrawingWindow& dw);
+	int partition(std::vector<Flight>& data, int first, int last);
+	int rpartition(std::vector<Flight>& data, int first, int last);
+
+};
+
+/*
 class MergeSort : public Sort {
 public:
 	void sort(std::vector<Flight>& data);
@@ -43,4 +54,5 @@ public:
 	std::vector<Flight> merge(std::vector<Flight>& left, std::vector<Flight>& right, bool sortOrder);
 	std::vector<Flight> findLeft(std::vector<Flight>& data, int mid);
 	std::vector<Flight> findRight(std::vector<Flight>& data, int mid);
-};
+};*/
+
