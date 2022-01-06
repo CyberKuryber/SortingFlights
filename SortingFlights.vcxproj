@@ -152,6 +152,7 @@
     <ClCompile Include="graph_lib\GUI.cpp" />
     <ClCompile Include="graph_lib\Simple_window.cpp" />
     <ClCompile Include="graph_lib\Window.cpp" />
+    <ClCompile Include="InputParameters.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Sort.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="graph_lib\Simple_window.h" />
     <ClInclude Include="graph_lib\std_lib_facilities.h" />
     <ClInclude Include="graph_lib\Window.h" />
+    <ClInclude Include="InputParmeters.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Sort.h" />
   </ItemGroup>

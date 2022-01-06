@@ -1,7 +1,8 @@
 #include "MainWindow.h"
 
+
 //TODO Radio button ako me ne bude mrzelo
-MainWindow::MainWindow(Point xy, int w, int h, const string& title) :
+MainWindow::MainWindow(Point xy, int w, int h, const string& title,bool cl) :
 	Window(xy, w, h, title),
 	selectionSortButton(
 		Point(GENERAL_X, 9 * GENERAL_H_W),
@@ -95,7 +96,11 @@ MainWindow::MainWindow(Point xy, int w, int h, const string& title) :
 	attach(flightNumPriorityTextBox);
 	attach(flightNumAscendingTextBox);
 
-	loopWindow();
+	if (!cl)
+	{
+		loopWindow();
+	}
+	
 }
 
 void MainWindow::cb_selectionSort(Address, Address pw)
@@ -108,45 +113,10 @@ void MainWindow::cb_quickSort(Address, Address pw)
 	reference_to<MainWindow>(pw).quickSortRun(true);
 }
 
-void MainWindow::loadFLights(string path) {
-	ifstream in(path);
-	//ifstream in("../inputFileExample.txt");
-	if (!in)
-	{
-		std::cerr << "ERROR: wrong input file name!";
-		exit(-1);
-	}
-
-	string line;
-	getline(in, line);
-	while (!in.eof())
-	{
-		int id;
-		string name;
-		string surname;
-
-		string line;
-		getline(in, line);
-		vector<string> tokens;
-		size_t pos = 0;
-		string delimiter = ";";
-		string token;
-
-		while ((pos = line.find(delimiter)) != std::string::npos) {
-			token = line.substr(0, pos);
-			token = std::regex_replace(token, std::regex("\\i"), "");
-			tokens.push_back(token);
-			line.erase(0, pos + delimiter.length());
-		}
-
-		flights.push_back(Flight(tokens[3], tokens[0], tokens[2], tokens[1]));
-	}
-	in.close();
-}
 
 void MainWindow::loadFLights() {
 	//TODO citaj posle sranja
-	ifstream in(inputFileInput.get_string());
+	ifstream in(this->ip.getInputFilePath());
 	//ifstream in("../inputFileExample.txt");
 	if (!in)
 	{
@@ -184,31 +154,27 @@ void MainWindow::loadFLights() {
 void MainWindow::selectionSortRun(bool inside) {
 	if (inside) {
 		createParameters();
-		loadFLights();
 	}
 
+	loadFLights();
 	SelectionSort ss = SelectionSort();
 	ss.resetNumCmps();
 	ss.sort(flights);
-	if (inside)
-	{
-		this->generateOutput();
-	}
+	this->generateOutput();
+	//selectionPushed = true;
 }
 
 void MainWindow::quickSortRun(bool inside) {
 	if (inside)
 	{
 		createParameters();
-		loadFLights();
 	}
-
+	loadFLights();
 	QuickSort qs = QuickSort();
 	qs.sort(flights);
 
-	if (inside) {
-		this->generateOutput();
-	}
+	this->generateOutput();
+	//quickPushed = true;
 }
 
 void MainWindow::loopWindow() {
@@ -234,194 +200,41 @@ void MainWindow::loopWindow() {
 3 time*/
 
 void MainWindow::createParameters() {
-	vector<std::string> priority;
-	vector<bool> ascending;
-	vector<int> codedPriority;
-	if (gateNumPriorityTextBox.get_string().empty())
-	{
-		priority.push_back("1");
-	}
-	else
-	{
-		priority.push_back(gateNumPriorityTextBox.get_string());
-	}
-	if (flightNumPriorityTextBox.get_string().empty())
-	{
-		priority.push_back("1");
-	}
-	else
-	{
-		priority.push_back(flightNumPriorityTextBox.get_string());
-	}
 
-	if (destinationPriorityTextBox.get_string().empty())
-	{
-		priority.push_back("1");
-	}
-	else
-	{
-		priority.push_back(destinationPriorityTextBox.get_string());
-	}
+	vector<std::string> args;
+	char* argv[8];
 
-	if (timePriorityTextBox.get_string().empty())
-	{
-		priority.push_back("0");
-	}
-	else
-	{
-		priority.push_back(timePriorityTextBox.get_string());
-	}
+	args.push_back(gateNumPriorityTextBox.get_string());
+	args.push_back(flightNumPriorityTextBox.get_string());
+	args.push_back(destinationPriorityTextBox.get_string());
+	args.push_back(timePriorityTextBox.get_string());
 
-	for (int i = 0; i < 4; i++)
-	{
-		codedPriority.push_back(i);
-	}
+	args.push_back(gateNumAscendingTextBox.get_string());
+	args.push_back(flightNumAscendingTextBox.get_string());
+	args.push_back(destinationAscendingTextBox.get_string());
+	args.push_back(timeAscendingTextBox.get_string());
 
-	if (gateNumAscendingTextBox.get_string().compare("false") == 0)
-	{
-		ascending.push_back(false);
-	}
-	else
-	{
-		ascending.push_back(true);
-	}
-
-	if (flightNumAscendingTextBox.get_string().compare("false") == 0)
-	{
-		ascending.push_back(false);
-	}
-	else
-	{
-		ascending.push_back(true);
-	}
-	if (destinationAscendingTextBox.get_string().compare("false") == 0)
-	{
-		ascending.push_back(false);
-	}
-	else
-	{
-		ascending.push_back(true);
-	}
-	if (timeAscendingTextBox.get_string().compare("false") == 0)
-	{
-		ascending.push_back(false);
-	}
-	else
-	{
-		ascending.push_back(true);
-	}
-
-	for (int i = 0; i < 3; i++)
-	{
-		for (int j = i + 1; j < 4; j++) {
-			if (priority[i].compare(priority[j]) > 0)
-			{
-				std::string pom = priority[j];
-				priority[j] = priority[i];
-				priority[i] = pom;
-
-				bool pomB = ascending[j];
-				ascending[j] = ascending[i];
-				ascending[i] = pomB;
-
-				int pomI = codedPriority[j];
-				codedPriority[j] = codedPriority[i];
-				codedPriority[i] = pomI;
-			}
-		}
-	}
-	for (int i = 0; i < 4; i++)
-	{
-		Flight::ascendingSort[i] = ascending[i];
-		Flight::sortingParameterArray[i] = codedPriority[i];
-	}
-}
-
-void MainWindow::createParameters(char* pr[], char* asc[]) {
-	vector<std::string> priority;
-	vector<bool> ascending;
-	vector<int> codedPriority;
-	for (int i = 0; i < 4; i++)
-	{
-		if (strcmp(pr[i], "x") == 0)
-		{
-			priority.push_back("x");
-		}
-		else
-		{
-			priority.push_back(pr[i]);
-		}
-	}
-
-	for (int i = 0; i < 4; i++)
-	{
-		codedPriority.push_back(i);
-	}
-
-	for (int i = 0; i < 4; i++)
-	{
-		if (strcmp(asc[i], "false") == 0)
-		{
-			ascending.push_back(false);
-		}
-		else
-		{
-			ascending.push_back(true);
-		}
-	}
-
-	for (int i = 0; i < 3; i++)
-	{
-		for (int j = i + 1; j < 4; j++) {
-			if (priority[i].compare(priority[j]) > 0)
-			{
-				std::string pom = priority[j];
-				priority[j] = priority[i];
-				priority[i] = pom;
-
-				bool pomB = ascending[j];
-				ascending[j] = ascending[i];
-				ascending[i] = pomB;
-
-				int pomI = codedPriority[j];
-				codedPriority[j] = codedPriority[i];
-				codedPriority[i] = pomI;
-			}
-		}
-	}
-	for (int i = 0; i < 4; i++)
-	{
-		Flight::ascendingSort[i] = ascending[i];
-		Flight::sortingParameterArray[i] = codedPriority[i];
-	}
-}
-
-void MainWindow::generateOutput(string path) {
-	if (path.empty())
-	{
-		return;
-	}
-
-	ofstream out(path);
-	vector<Flight>::iterator it;
-	for (it = flights.begin(); it != flights.end(); it++)
-	{
-		out << (*it).toString() << endl;
-	}
-	out.close();
+	ip.setInputFilePath(inputFileInput.get_string());
+	ip.setOutputFilePath(outputFileInput.get_string());
+	ip.guiGenerate(args);
+	
 }
 
 void MainWindow::generateOutput() {
-	if (outputFileInput.get_string().empty())
+	if (ip.getOutputFilePath().empty())
 	{
 		return;
 	}
 
-	ofstream out(outputFileInput.get_string());
+	ofstream out(ip.getOutputFilePath());
 	vector<Flight>::iterator it;
 	for (it = flights.begin(); it != flights.end(); it++)
 	{
 		out << (*it).toString() << endl;
 	}
 	out.close();
+}
+
+void MainWindow::setIp(InputParameters i) {
+	this->ip = i;
 }

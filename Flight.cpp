@@ -86,5 +86,5 @@ bool Flight::operator>(const Flight& flight) {
 }
 
 std::string Flight::toString() {
-	return this->destination + ";" + this->departureTime + ";" + this->flightNum + ";" + this->gateNum;
+	return this->destination + ";" + this->departureTime + ";" + this->flightNum + ";" + this->gateNum + ";";
 }

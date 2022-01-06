@@ -16,6 +16,7 @@
 #include "Sort.h"
 #include "MainWindow.h"
 
+
 using namespace std;
 
 //void loadFlights(ifstream& in);
@@ -28,58 +29,30 @@ using namespace std;
 
 void main(int argc, char* argv[])
 {
-	cout << argv[1] << endl;
 	if (argc == 1) {
-		MainWindow mainWindow(Point(50, 50), WINDOW_W, WINDOW_H, "Sort Flights");
+		MainWindow mainWindow(Point(50, 50), WINDOW_W, WINDOW_H, "Sort Flights",false);
 	}
 	else if (argc < 3)
 	{
 		cout << "Invalid input, not enough command line arguments" << endl;
 		return;
 	}
-	{
-		MainWindow mainWindow(Point(50, 50), 0, 0, "Sort Flights");
-		mainWindow.hide();
-		mainWindow.loadFLights(argv[1]);
-		char* priority[4];
-		for (int i = 0; i < 4; i++)
-		{
-			priority[i] = "x";
-		}
-		for (int i = 4; i < argc && i<8; i++)
-		{
-			priority[i - 4] = argv[i];
-		}
+	else {
+		MainWindow mainWindow(Point(50, 50), WINDOW_W, WINDOW_H, "Sort Flights",true);
+		InputParameters ip;
+		ip.commandGenerate(argc, argv);
+		mainWindow.setIp(ip);
 
-		char* ascending[4];
-		for (int i = 0; i < 4; i++)
-		{
-			ascending[i] = "x";
-		}
-		for (int i = 8; i < argc && i<12; i++)
-		{
-			ascending[i - 8] = argv[i];
-		}
 
-		if (strcmp(argv[2],"q") == 0)
-		{
-			mainWindow.quickSortRun(false);
-		}
-		else if(strcmp(argv[2], "s") == 0)
+
+		if (ip.getIsSelectionSort())
 		{
 			mainWindow.selectionSortRun(false);
 		}
-
-		if (argc>4)
-		{
-			mainWindow.generateOutput(argv[3]);
-		}
 		else
 		{
-			mainWindow.generateOutput("");
+			mainWindow.quickSortRun(false);
 		}
-		
-
 	}
 	/*ifstream in("../inputFileExample.txt");
 	if (!in)
@@ -97,6 +70,8 @@ void main(int argc, char* argv[])
 	cout << "WTF" << endl;
 }
 
+
+//args = ../inputFileExample.txt q ../outputFileExample.txt 1 1 1 0
 /*void loadFlights(ifstream& in)
 {
 	string line;

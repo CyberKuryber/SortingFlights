@@ -16,6 +16,7 @@
 #include <fstream>
 #include <regex>
 #include "Sort.h"
+#include "InputParmeters.h"
 
 #define WINDOW_W			800
 #define WINDOW_H			550
@@ -36,15 +37,17 @@ using namespace Graph_lib;
 class MainWindow : public Window
 {
 public:
-	MainWindow(Point xy, int w, int h, const string& title);
+	MainWindow(Point xy, int w, int h, const string& title, bool cl);
 	void loadFLights(string path);
 	void quickSortRun(bool inside);
 	void selectionSortRun(bool inside);
 	void createParameters(char* pr[], char* asc[]);
 	void generateOutput(string path);
+	void setIp(InputParameters i);
 
 private:
 	vector<Flight> flights;
+	InputParameters ip;
 
 	Button selectionSortButton;
 	Button quickSortButton;
