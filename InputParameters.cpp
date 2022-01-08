@@ -16,20 +16,11 @@ void InputParameters::commandGenerate(int argc, char* argv[]) {
 		pr[i - 4] = argv[i];
 	}
 
-	char* asc[4];
-	for (int i = 0; i < 4; i++)
-	{
-		asc[i] = "x";
-	}
-	for (int i = 8; i < argc && i < 12; i++)
-	{
-		asc[i - 8] = argv[i];
-	}
 
 	
 
 	vector<std::string> priority;
-	vector<bool> ascending;
+	bool ascending;
 	vector<int> codedPriority;
 	for (int i = 0; i < 4; i++)
 	{
@@ -48,17 +39,6 @@ void InputParameters::commandGenerate(int argc, char* argv[]) {
 		codedPriority.push_back(i);
 	}
 
-	for (int i = 0; i < 4; i++)
-	{
-		if (strcmp(asc[i], "false") == 0)
-		{
-			ascending.push_back(false);
-		}
-		else
-		{
-			ascending.push_back(true);
-		}
-	}
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -69,10 +49,6 @@ void InputParameters::commandGenerate(int argc, char* argv[]) {
 				priority[j] = priority[i];
 				priority[i] = pom;
 
-				bool pomB = ascending[j];
-				ascending[j] = ascending[i];
-				ascending[i] = pomB;
-
 				int pomI = codedPriority[j];
 				codedPriority[j] = codedPriority[i];
 				codedPriority[i] = pomI;
@@ -81,7 +57,6 @@ void InputParameters::commandGenerate(int argc, char* argv[]) {
 	}
 	for (int i = 0; i < 4; i++)
 	{
-		Flight::ascendingSort[i] = ascending[i];
 		Flight::sortingParameterArray[i] = codedPriority[i];
 	}
 	if (argc>3)
@@ -90,24 +65,21 @@ void InputParameters::commandGenerate(int argc, char* argv[]) {
 	}
 	this->setSortType(argv[2]);
 	
+	if (argc == 9)
+	{
+		Flight::ascendingSort = !(strcmp(argv[8], "false") == 0);
+	}
+
 }
 
 void InputParameters::guiGenerate(vector<std::string> argv) {
 	vector<std::string> priority;
-	vector<bool> ascending;
+	bool ascending;
 	vector<int> codedPriority;
 	for (int i = 0; i < 4; i++)
 	{
 		priority.push_back(argv[i]);
 		codedPriority.push_back(i);
-		if (argv[i+4].compare("false")==0)
-		{
-			ascending.push_back(false);
-		}
-		else
-		{
-			ascending.push_back(true);
-		}
 	}
 
 
@@ -121,22 +93,18 @@ void InputParameters::guiGenerate(vector<std::string> argv) {
 				priority[j] = priority[i];
 				priority[i] = pom;
 
-				bool pomB = ascending[j];
-				ascending[j] = ascending[i];
-				ascending[i] = pomB;
-
 				int pomI = codedPriority[j];
 				codedPriority[j] = codedPriority[i];
 				codedPriority[i] = pomI;
 			}
 		}
 	}
+	
 	for (int i = 0; i < 4; i++)
 	{
-		Flight::ascendingSort[i] = ascending[i];
 		Flight::sortingParameterArray[i] = codedPriority[i];
 	}
-
+	Flight::ascendingSort = !(argv[4].compare("false") == 0);
 }
 
 void InputParameters::setSortType(std::string s){

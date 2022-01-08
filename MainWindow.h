@@ -66,14 +66,8 @@ private:
 	In_box inputFileInput;
 
 	In_box timePriorityTextBox;
-	In_box timeAscendingTextBox;
-
 	In_box destinationPriorityTextBox;
-	In_box destinationAscendingTextBox;
-
 	In_box gateNumPriorityTextBox;
-	In_box gateNumAscendingTextBox;
-
 	In_box flightNumPriorityTextBox;
-	In_box flightNumAscendingTextBox;
+	In_box AscendingTextBox;
 };

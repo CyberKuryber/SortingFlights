@@ -15,7 +15,7 @@
 
 int Flight::sortingParameter = 3;
 int Flight::sortingParameterArray[4] = { 3,2,1,0 };
-bool Flight::ascendingSort[4] = { false,false,false,false };
+bool Flight::ascendingSort = true;
 Flight::Flight(std::string gate, std::string dest, std::string flight, std::string time) :gateNum(gate), destination(dest), flightNum(flight), departureTime(time) {}
 
 std::string Flight::getGateNum() const {

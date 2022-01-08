@@ -27,7 +27,7 @@ public:
 	bool operator>(const Flight& flight);
 	static int sortingParameterArray[4];
 	static int sortingParameter;
-	static bool ascendingSort[4];
+	static bool ascendingSort;
 	std::string toString();
 	std::string flightNum;
 };

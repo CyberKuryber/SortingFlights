@@ -54,30 +54,11 @@ MainWindow::MainWindow(Point xy, int w, int h, const string& title,bool cl) :
 		GENERAL_H_W,
 		"Time Priority"
 	),
-	gateNumAscendingTextBox(
+	AscendingTextBox(
 		Point(GENERAL_X, GENERAL_H_W * 7),
 		GENERAL_H_W,
 		GENERAL_H_W,
-		"Gate Ascending"
-	),
-	flightNumAscendingTextBox(
-		Point(GENERAL_X + 4 * GENERAL_H_W, GENERAL_H_W * 7),
-		GENERAL_H_W,
-		GENERAL_H_W,
-		"Flight Ascending"
-	),
-	destinationAscendingTextBox(
-		Point(GENERAL_X + 8 * GENERAL_H_W, GENERAL_H_W * 7),
-		GENERAL_H_W,
-		GENERAL_H_W,
-		"Destination Ascending"
-	),
-
-	timeAscendingTextBox(
-		Point(GENERAL_X + 12 * GENERAL_H_W, GENERAL_H_W * 7),
-		GENERAL_H_W,
-		GENERAL_H_W,
-		"Time Ascending"
+		"Ascending"
 	),
 	quickPushed(false),
 	selectionPushed(false)
@@ -88,13 +69,10 @@ MainWindow::MainWindow(Point xy, int w, int h, const string& title,bool cl) :
 	attach(outputFileInput);
 	attach(inputFileInput);
 	attach(timePriorityTextBox);
-	attach(timeAscendingTextBox);
 	attach(destinationPriorityTextBox);
-	attach(destinationAscendingTextBox);
 	attach(gateNumPriorityTextBox);
-	attach(gateNumAscendingTextBox);
 	attach(flightNumPriorityTextBox);
-	attach(flightNumAscendingTextBox);
+	attach(AscendingTextBox);
 
 	if (!cl)
 	{
@@ -169,6 +147,7 @@ void MainWindow::quickSortRun(bool inside) {
 	{
 		createParameters();
 	}
+	flights.clear();
 	loadFLights();
 	QuickSort qs = QuickSort();
 	qs.sort(flights);
@@ -197,7 +176,9 @@ void MainWindow::loopWindow() {
 0 gateNum
 1 flightNum
 2 destination
-3 time*/
+3 time
+../inputFileExample.txt s ../outputFileExample.txt 1 1 1 0
+*/
 
 void MainWindow::createParameters() {
 
@@ -208,11 +189,7 @@ void MainWindow::createParameters() {
 	args.push_back(flightNumPriorityTextBox.get_string());
 	args.push_back(destinationPriorityTextBox.get_string());
 	args.push_back(timePriorityTextBox.get_string());
-
-	args.push_back(gateNumAscendingTextBox.get_string());
-	args.push_back(flightNumAscendingTextBox.get_string());
-	args.push_back(destinationAscendingTextBox.get_string());
-	args.push_back(timeAscendingTextBox.get_string());
+	args.push_back(AscendingTextBox.get_string());
 
 	ip.setInputFilePath(inputFileInput.get_string());
 	ip.setOutputFilePath(outputFileInput.get_string());
