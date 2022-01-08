@@ -37,6 +37,7 @@ void SelectionSort::primarySort(std::vector<Flight>& data, bool sortOrder, Drawi
 			Flight hlp = data[i];
 			data[i] = min;
 			data[minIndex] = hlp;
+
 			dw.addElements(data);
 			dw.drawOuts();
 			dw.newRow();

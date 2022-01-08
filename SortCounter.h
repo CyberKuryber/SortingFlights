@@ -13,6 +13,7 @@ public:
 	int getComparationCount() const;
 	int getSwapCount() const;
 	int getIterationCount() const;
+	SortCounter();
 
 private:
 	int comparationCount;

@@ -35,13 +35,18 @@ public:
 	void drawOuts();
 	void loopWindow();
 	void newRow();
+	bool isNextButtonPushed();
 
 private:
 	int currentX;
 	int currentY;
 	bool exitButtonPushed;
+	bool nextButtonPushed;
 	vector<Out_box*>  outs;
 	Button exitButton;
+	Button nextButton;
 	static void cb_exit(Address, Address);
 	void exitButtonRun();
+	static void cb_next(Address, Address);
+	void nextButtonRun();
 };

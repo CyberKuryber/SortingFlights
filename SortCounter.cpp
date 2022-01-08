@@ -19,3 +19,5 @@ int SortCounter::getSwapCount() const {
 int SortCounter::getIterationCount() const {
 	return this->iterationCount;
 }
+
+SortCounter::SortCounter():swapCount(0),iterationCount(0),comparationCount(0) {}
