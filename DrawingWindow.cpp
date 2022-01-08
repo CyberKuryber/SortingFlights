@@ -33,6 +33,15 @@ void DrawingWindow::addElements(vector<Flight>& f) {
 		//Out_box current(Point(currentX, currentY), 0, GENERAL_H, f[i].getFlightNum());
 		this->outs.push_back(new Out_box(Point(currentX, currentY), 0, GENERAL_H,	s ));
 		this->currentX += GENERAL_X;
+
+	}
+	while (!this->isNextButtonPushed() && !this->exitButtonPushed)
+	{
+		Fl::wait();
+	}
+	if (this->exitButtonPushed)
+	{
+		exit(0);
 	}
 }
 
@@ -49,14 +58,7 @@ void DrawingWindow::drawOuts() {
 	}
 
 	this->outs.clear();
-	while (!this->isNextButtonPushed()&&!this->exitButtonPushed)
-	{
-		Fl::wait();
-	}
-	if (this->exitButtonPushed)
-	{
-		exit(0);
-	}
+	
 	this->redraw();
 	this->nextButtonPushed = false;
 }

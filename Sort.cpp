@@ -17,7 +17,7 @@ void Sort::resetNumCmps() {
 	this->num_cmps = 0;
 }
 
-void SelectionSort::primarySort(std::vector<Flight>& data, bool sortOrder, DrawingWindow& dw, SortCounter sortCounter) {
+void SelectionSort::primarySort(std::vector<Flight>& data, bool sortOrder, DrawingWindow& dw, SortCounter& sortCounter) {
 	Flight::sortingParameter = Flight::sortingParameterArray[0];
 	if (sortOrder)
 	{
@@ -129,9 +129,24 @@ void SelectionSort::sort(std::vector<Flight>& data) {
 		dw.addCustomTextLabel("Finish:");
 		dw.addElements(data);
 		dw.drawOuts();
-		dw.loopWindow();
+		
 		current.clear();
 		toSort.clear();
+
+		dw.newRow();
+		int iterationCount = sortcounter.getIterationCount();
+		sortcounter.iterationCountInc();
+		int total = sortcounter.getTotalComparationCount();
+		int swapCount = sortcounter.getSwapCount();
+		dw.addCustomTextLabel("Iterations:");
+		dw.addIterLable(iterationCount);
+		dw.addCustomTextLabel("Swaps:");
+		dw.addIterLable(swapCount);
+		dw.addCustomTextLabel("Comparations:");
+		dw.addIterLable(total);
+		dw.drawOuts();
+		dw.loopWindow();
+
 	}
 }
 
@@ -328,13 +343,31 @@ void QuickSort::sort(std::vector<Flight>& data) {
 			}
 		}
 		
-		dw.addCustomTextLabel("Finish:");
-		dw.addElements(data);
-		dw.drawOuts();
-		dw.loopWindow();
+		
+
 		current.clear();
 		toSort.clear();
+
 	}
+	dw.addCustomTextLabel("Finish:");
+	dw.addElements(data);
+	dw.drawOuts();
+	
+	
+	dw.newRow();
+	int iterationCount = sortCounter.getIterationCount();
+	sortCounter.iterationCountInc();
+	int total = sortCounter.getTotalComparationCount();
+	int swapCount = sortCounter.getSwapCount();
+	dw.addCustomTextLabel("Iterations:");
+	dw.addIterLable(iterationCount);
+	dw.addCustomTextLabel("Swaps:");
+	dw.addIterLable(swapCount);
+	dw.addCustomTextLabel("Comparations:");
+	dw.addIterLable(total);
+	dw.drawOuts();
+
+	dw.loopWindow();
 }
 
 void swap(Flight* a, Flight* b)

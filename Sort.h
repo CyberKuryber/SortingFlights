@@ -34,7 +34,7 @@ class SelectionSort : public Sort
 public:
 	// main entry point
 	void sort(std::vector<Flight>& data);
-	void primarySort(std::vector<Flight>& data, bool sortOrder, DrawingWindow& dw, SortCounter sortCounter);
+	void primarySort(std::vector<Flight>& data, bool sortOrder, DrawingWindow& dw, SortCounter& sortCounter);
 };
 
 class QuickSort : public Sort

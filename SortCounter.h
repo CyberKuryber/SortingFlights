@@ -14,6 +14,8 @@ public:
 	int getSwapCount() const;
 	int getIterationCount() const;
 	SortCounter();
+	std::vector<int> getComparationsPerIteration();
+	int getTotalComparationCount();
 
 private:
 	int comparationCount;
