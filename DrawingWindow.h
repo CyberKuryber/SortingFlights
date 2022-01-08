@@ -36,6 +36,8 @@ public:
 	void loopWindow();
 	void newRow();
 	bool isNextButtonPushed();
+	void addIterLable(int x);
+	void addCustomTextLabel(std::string text);
 
 private:
 	int currentX;

@@ -8,6 +8,8 @@ void SortCounter::swapCountInc() {
 }
 void SortCounter::iterationCountInc() {
 	this->iterationCount++;
+	this->comparationsPerIteration.push_back(this->comparationCount);
+	this->comparationCount = 0;
 }
 
 int SortCounter::getComparationCount() const {

@@ -10,6 +10,7 @@
 #include "DrawingWindow.h"
 #include "Flight.h"
 #include <vector>
+#include "SortCounter.h"
 
 // Sort class
 class Sort
@@ -33,16 +34,16 @@ class SelectionSort : public Sort
 public:
 	// main entry point
 	void sort(std::vector<Flight>& data);
-	void primarySort(std::vector<Flight>& data, bool sortOrder, DrawingWindow& dw);
+	void primarySort(std::vector<Flight>& data, bool sortOrder, DrawingWindow& dw, SortCounter sortCounter);
 };
 
 class QuickSort : public Sort
 {
 public:
 	void sort(std::vector<Flight>& data);
-	void primarySort(std::vector<Flight>& data, bool sortOrder, int first, int last, DrawingWindow& dw);
-	int partition(std::vector<Flight>& data, bool sortOrder, int first, int last);
-	int rpartition(std::vector<Flight>& data, bool sortOrder, int first, int last);
+	void primarySort(std::vector<Flight>& data, bool sortOrder, int first, int last, DrawingWindow& dw,SortCounter& sortCounter);
+	int partition(std::vector<Flight>& data, bool sortOrder, int first, int last, SortCounter& sortCounter);
+	int rpartition(std::vector<Flight>& data, bool sortOrder, int first, int last, SortCounter& sortCounter);
 };
 
 /*

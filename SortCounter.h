@@ -21,4 +21,5 @@ private:
 	int iterationCount;
 	std::map<int, int> mapCurrentSwaps;
 	std::vector<std::map<int, int>> ChangesList;
+	std::vector<int> comparationsPerIteration;
 };

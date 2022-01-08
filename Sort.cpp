@@ -7,7 +7,6 @@
 //============================================================================
 
 #include "Sort.h"
-
 using namespace std;
 
 unsigned long Sort::getNumCmps() {
@@ -18,7 +17,7 @@ void Sort::resetNumCmps() {
 	this->num_cmps = 0;
 }
 
-void SelectionSort::primarySort(std::vector<Flight>& data, bool sortOrder, DrawingWindow& dw) {
+void SelectionSort::primarySort(std::vector<Flight>& data, bool sortOrder, DrawingWindow& dw, SortCounter sortCounter) {
 	Flight::sortingParameter = Flight::sortingParameterArray[0];
 	if (sortOrder)
 	{
@@ -29,18 +28,22 @@ void SelectionSort::primarySort(std::vector<Flight>& data, bool sortOrder, Drawi
 			{
 				if (min > data[j])
 				{
+					sortCounter.swapCountInc();
 					min = data[j];
 					minIndex = j;
 				}
-				this->num_cmps++;
+				sortCounter.comparationCountInc();
 			}
 			Flight hlp = data[i];
 			data[i] = min;
 			data[minIndex] = hlp;
 
+			sortCounter.iterationCountInc();
+			dw.addIterLable(sortCounter.getIterationCount());
 			dw.addElements(data);
 			dw.drawOuts();
 			dw.newRow();
+			
 		}
 	}
 	else
@@ -55,19 +58,29 @@ void SelectionSort::primarySort(std::vector<Flight>& data, bool sortOrder, Drawi
 					{
 						max = data[j];
 						maxIndex = j;
+						sortCounter.swapCountInc();
 					}
-					this->num_cmps++;
+					sortCounter.comparationCountInc();
 				}
 				Flight hlp = data[i];
 				data[i] = max;
 				data[maxIndex] = hlp;
+
+				sortCounter.iterationCountInc();
+				dw.addIterLable(sortCounter.getIterationCount());
+				dw.addElements(data);
+				dw.drawOuts();
+				dw.newRow();
 			}
+			
 		}
+
 	}
 }
 
 void SelectionSort::sort(std::vector<Flight>& data) {
 	this->resetNumCmps();
+	SortCounter sortcounter;
 	Flight::sortingParameter = Flight::sortingParameterArray[0];
 	if (Flight::sortingParameter == -1)
 	{
@@ -76,7 +89,7 @@ void SelectionSort::sort(std::vector<Flight>& data) {
 
 	DrawingWindow dw(Point(50, 50), WINDOW_W, WINDOW_H, "Drawing");
 
-	this->primarySort(data, Flight::ascendingSort[0], dw);
+	this->primarySort(data, Flight::ascendingSort[0], dw,sortcounter);
 
 	for (int i = 1; i < sizeof(Flight::sortingParameterArray) / sizeof(Flight::sortingParameterArray[0]); i++)
 	{
@@ -106,14 +119,14 @@ void SelectionSort::sort(std::vector<Flight>& data) {
 		int dataCounter = 0;
 		for (int j = 0; j < toSort.size(); j++) {
 			if (toSort[j].size() > 1)
-				primarySort(toSort[j], Flight::ascendingSort[i], dw);
+				primarySort(toSort[j], Flight::ascendingSort[i], dw, sortcounter);
 			for (int k = 0; k < toSort[j].size(); k++)
 			{
 				data[dataCounter] = toSort[j][k];
 				dataCounter++;
 			}
 		}
-
+		dw.addCustomTextLabel("Finish:");
 		dw.addElements(data);
 		dw.drawOuts();
 		dw.loopWindow();
@@ -267,6 +280,7 @@ void MergeSort::sort(std::vector<Flight>& data) {
 */
 
 void QuickSort::sort(std::vector<Flight>& data) {
+	SortCounter sortCounter;
 	this->resetNumCmps();
 	Flight::sortingParameter = Flight::sortingParameterArray[0];
 	if (Flight::sortingParameter == -1)
@@ -276,7 +290,7 @@ void QuickSort::sort(std::vector<Flight>& data) {
 
 	DrawingWindow dw(Point(50, 50), WINDOW_W, WINDOW_H, "Drawing");
 
-	this->primarySort(data, Flight::ascendingSort[0], 0, data.size() - 1, dw);
+	this->primarySort(data, Flight::ascendingSort[0], 0, data.size() - 1, dw, sortCounter);
 
 	for (int i = 1; i < sizeof(Flight::sortingParameterArray) / sizeof(Flight::sortingParameterArray[0]); i++)
 	{
@@ -306,14 +320,15 @@ void QuickSort::sort(std::vector<Flight>& data) {
 		int dataCounter = 0;
 		for (int j = 0; j < toSort.size(); j++) {
 			if (toSort[j].size() > 1)
-				primarySort(toSort[j], Flight::ascendingSort[i], 0, toSort[j].size() - 1, dw);
+				primarySort(toSort[j], Flight::ascendingSort[i], 0, toSort[j].size() - 1, dw, sortCounter);
 			for (int k = 0; k < toSort[j].size(); k++)
 			{
 				data[dataCounter] = toSort[j][k];
 				dataCounter++;
 			}
 		}
-
+		
+		dw.addCustomTextLabel("Finish:");
 		dw.addElements(data);
 		dw.drawOuts();
 		dw.loopWindow();
@@ -329,22 +344,22 @@ void swap(Flight* a, Flight* b)
 	*b = t;
 }
 
-void QuickSort::primarySort(std::vector<Flight>& data, bool sortOrder, int first, int last, DrawingWindow& dw) {
+void QuickSort::primarySort(std::vector<Flight>& data, bool sortOrder, int first, int last, DrawingWindow& dw, SortCounter& sortCounter) {
 	if (first < (last - 1))
 	{
-		int index = this->rpartition(data, sortOrder, first, last);
-		/*cout << first << endl;
-		cout << last << endl;
-		cout << index << endl;*/
+		int index = this->rpartition(data, sortOrder, first, last, sortCounter);
+
+		sortCounter.iterationCountInc();
+		dw.addIterLable(sortCounter.getIterationCount());
 		dw.addElements(data);
 		dw.drawOuts();
 		dw.newRow();
-		primarySort(data, sortOrder, first, index, dw);
-		primarySort(data, sortOrder, index + 1, last, dw);
+		primarySort(data, sortOrder, first, index, dw, sortCounter);
+		primarySort(data, sortOrder, index + 1, last, dw, sortCounter);
 	}
 }
 
-int  QuickSort::partition(std::vector<Flight>& data, bool sortOrder, int first, int last) {
+int  QuickSort::partition(std::vector<Flight>& data, bool sortOrder, int first,int last, SortCounter& sortCounter) {
 	Flight pivot = data[last];
 
 	int i = first - 1;
@@ -357,6 +372,7 @@ int  QuickSort::partition(std::vector<Flight>& data, bool sortOrder, int first, 
 			{
 				i++;
 				swap(data[i], data[j]);
+				sortCounter.swapCountInc();
 			}
 		}
 		else {
@@ -364,18 +380,22 @@ int  QuickSort::partition(std::vector<Flight>& data, bool sortOrder, int first, 
 			{
 				i++;
 				swap(data[i], data[j]);
+				sortCounter.swapCountInc();
 			}
 		}
+		sortCounter.comparationCountInc();
 	}
 
 	swap(data[++i], data[last]);
+	sortCounter.swapCountInc();
+
 	return i;
 }
 
-int  QuickSort::rpartition(std::vector<Flight>& data, bool sortOrder, int first, int last) {
+int  QuickSort::rpartition(std::vector<Flight>& data, bool sortOrder, int first, int last, SortCounter& sortCounter) {
 	srand(time(NULL));
 	int i = rand();
 	i = first + (i % (last - first));
 	swap(data[i], data[last]);
-	return this->partition(data, sortOrder, first, last);
+	return this->partition(data, sortOrder, first, last,sortCounter);
 }

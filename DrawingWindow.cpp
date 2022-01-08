@@ -1,12 +1,37 @@
 #include "DrawingWindow.h"
 
+/*
+0 gateNum
+1 flightNum
+2 destination
+3 time*/
 void DrawingWindow::addElements(vector<Flight>& f) {
 	vector<Flight>::iterator it;
 
 	for (it = f.begin(); it != f.end(); it++)
 	{
+		string s;
+		switch (Flight::sortingParameter)
+		{
+		case 0: {
+			s = (*it).getFlightNum();
+			break;
+		}
+		case 1: {
+			s = (*it).getFlightNum();
+			break;
+		}
+		case 2: {
+			s = (*it).getDestination();
+			break;
+		}
+
+		default:
+			s = (*it).getDepartureTime();
+			break;
+		}
 		//Out_box current(Point(currentX, currentY), 0, GENERAL_H, f[i].getFlightNum());
-		this->outs.push_back(new Out_box(Point(currentX, currentY), 0, GENERAL_H, (*it).getFlightNum()));
+		this->outs.push_back(new Out_box(Point(currentX, currentY), 0, GENERAL_H,	s ));
 		this->currentX += GENERAL_X;
 	}
 }
@@ -24,9 +49,13 @@ void DrawingWindow::drawOuts() {
 	}
 
 	this->outs.clear();
-	while (!this->isNextButtonPushed())
+	while (!this->isNextButtonPushed()&&!this->exitButtonPushed)
 	{
 		Fl::wait();
+	}
+	if (this->exitButtonPushed)
+	{
+		exit(0);
 	}
 	this->redraw();
 	this->nextButtonPushed = false;
@@ -88,4 +117,15 @@ void DrawingWindow::generateGap() {
 
 bool DrawingWindow::isNextButtonPushed() {
 	return this->nextButtonPushed;
+}
+
+void DrawingWindow::addIterLable(int x) {
+	stringstream ss;
+	ss << x;
+	this->outs.push_back(new Out_box(Point(currentX, currentY), 0, GENERAL_H,ss.str()));
+	this->currentX += GENERAL_X;
+}
+void DrawingWindow::addCustomTextLabel(std::string text) {
+	this->outs.push_back(new Out_box(Point(currentX, currentY), 0, GENERAL_H, text));
+	this->currentX += GENERAL_X;
 }
