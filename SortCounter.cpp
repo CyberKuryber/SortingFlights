@@ -1,3 +1,11 @@
+//============================================================================
+// Name        : SortCounter.cpp
+// Author      : Uros Stanic
+// Date        : 11.01.2022.
+// Copyright   :
+// Description : SortCounter class implementation
+//============================================================================
+
 #include "SortCounter.h"
 
 void SortCounter::comparationCountInc() {
@@ -22,7 +30,7 @@ int SortCounter::getIterationCount() const {
 	return this->iterationCount;
 }
 
-SortCounter::SortCounter():swapCount(0),iterationCount(0),comparationCount(0) {}
+SortCounter::SortCounter() :swapCount(0), iterationCount(0), comparationCount(0) {}
 
 std::vector<int> SortCounter::getComparationsPerIteration() {
 	return this->comparationsPerIteration;
@@ -30,7 +38,7 @@ std::vector<int> SortCounter::getComparationsPerIteration() {
 int SortCounter::getTotalComparationCount() {
 	std::vector<int>::iterator it;
 	int total = 0;
-	for ( it = this->comparationsPerIteration.begin(); it != this->comparationsPerIteration.end(); it++)
+	for (it = this->comparationsPerIteration.begin(); it != this->comparationsPerIteration.end(); it++)
 	{
 		total += (*it);
 	}

@@ -168,7 +168,7 @@
     <ClInclude Include="graph_lib\std_lib_facilities.h" />
     <ClInclude Include="graph_lib\Window.h" />
     <ClInclude Include="InputParmeters.h" />
-    <ClInclude Include="MainWindow.h" />
+    <ClInclude Include="MyWindow.h" />
     <ClInclude Include="Sort.h" />
     <ClInclude Include="SortCounter.h" />
   </ItemGroup>

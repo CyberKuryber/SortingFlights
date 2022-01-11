@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : Flight.cpp
-// Author      :
-// Date        :
+// Author      : Uros Stanic
+// Date        : 11.01.2022.
 // Copyright   :
 // Description : Implementation of the Flight class
 //============================================================================

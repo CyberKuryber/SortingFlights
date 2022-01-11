@@ -3,7 +3,7 @@
 // Author      :
 // Date        :
 // Copyright   :
-// Description :
+// Description : Main class for defining window
 //============================================================================
 #pragma once
 #include <string>
@@ -30,4 +30,5 @@ public:
 	static bool ascendingSort;
 	std::string toString();
 	std::string flightNum;
+	~Flight() {};
 };

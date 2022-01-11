@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : Sort.cpp
-// Author      :
-// Date        :
+// Author      : Uros Stanic
+// Date        : 11.01.2021
 // Copyright   :
 // Description : Implementation of the sort classes
 //============================================================================
@@ -43,7 +43,6 @@ void SelectionSort::primarySort(std::vector<Flight>& data, bool sortOrder, Drawi
 			dw.addElements(data);
 			dw.drawOuts();
 			dw.newRow();
-			
 		}
 	}
 	else
@@ -72,9 +71,7 @@ void SelectionSort::primarySort(std::vector<Flight>& data, bool sortOrder, Drawi
 				dw.drawOuts();
 				dw.newRow();
 			}
-			
 		}
-
 	}
 }
 
@@ -91,28 +88,24 @@ void SelectionSort::sort(std::vector<Flight>& data) {
 
 	this->primarySort(data, Flight::ascendingSort, dw, sortcounter);
 
-		dw.addCustomTextLabel("Finish:");
-		dw.addElements(data);
-		dw.drawOuts();
-		
+	dw.addCustomTextLabel("Finish:");
+	dw.addElements(data);
+	dw.drawOuts();
 
-		dw.newRow();
-		int iterationCount = sortcounter.getIterationCount();
-		sortcounter.iterationCountInc();
-		int total = sortcounter.getTotalComparationCount();
-		int swapCount = sortcounter.getSwapCount();
-		dw.addCustomTextLabel("Iterations:");
-		dw.addIterLable(iterationCount);
-		dw.addCustomTextLabel("Swaps:");
-		dw.addIterLable(swapCount);
-		dw.addCustomTextLabel("Comparations:");
-		dw.addIterLable(total);
-		dw.drawOuts();
-		dw.loopWindow();
-
-	
+	dw.newRow();
+	int iterationCount = sortcounter.getIterationCount();
+	sortcounter.iterationCountInc();
+	int total = sortcounter.getTotalComparationCount();
+	int swapCount = sortcounter.getSwapCount();
+	dw.addCustomTextLabel("Iterations:");
+	dw.addIterLable(iterationCount);
+	dw.addCustomTextLabel("Swaps:");
+	dw.addIterLable(swapCount);
+	dw.addCustomTextLabel("Comparations:");
+	dw.addIterLable(total);
+	dw.drawOuts();
+	dw.loopWindow();
 }
-
 
 void QuickSort::sort(std::vector<Flight>& data) {
 	SortCounter sortCounter;
@@ -127,13 +120,10 @@ void QuickSort::sort(std::vector<Flight>& data) {
 
 	this->primarySort(data, Flight::ascendingSort, 0, data.size() - 1, dw, sortCounter);
 
-	
-
 	dw.addCustomTextLabel("Finish:");
 	dw.addElements(data);
 	dw.drawOuts();
-	
-	
+
 	dw.newRow();
 	int iterationCount = sortCounter.getIterationCount();
 	sortCounter.iterationCountInc();
@@ -172,7 +162,7 @@ void QuickSort::primarySort(std::vector<Flight>& data, bool sortOrder, int first
 	}
 }
 
-int  QuickSort::partition(std::vector<Flight>& data, bool sortOrder, int first,int last, SortCounter& sortCounter) {
+int  QuickSort::partition(std::vector<Flight>& data, bool sortOrder, int first, int last, SortCounter& sortCounter) {
 	Flight pivot = data[last];
 
 	int i = first - 1;
@@ -210,5 +200,5 @@ int  QuickSort::rpartition(std::vector<Flight>& data, bool sortOrder, int first,
 	int i = rand();
 	i = first + (i % (last - first));
 	swap(data[i], data[last]);
-	return this->partition(data, sortOrder, first, last,sortCounter);
+	return this->partition(data, sortOrder, first, last, sortCounter);
 }

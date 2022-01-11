@@ -1,21 +1,28 @@
-#include "MainWindow.h"
+//============================================================================
+// Name        : MainWindow.cpp
+// Author      : Uros Stanic
+// Date        : 11.01.2021
+// Copyright   :
+// Description : Implementation of the MyWindow class
+//============================================================================
 
+#include "MyWindow.h"
 
 //TODO Radio button ako me ne bude mrzelo
-MainWindow::MainWindow(Point xy, int w, int h, const string& title,bool cl) :
+MyWindow::MyWindow(Point xy, int w, int h, const string& title, bool cl) :
 	Window(xy, w, h, title),
 	selectionSortButton(
 		Point(GENERAL_X, 9 * GENERAL_H_W),
 		BUTTON_W,
 		BUTTON_H,
 		"Selection Sort",
-		cb_selectionSort),
+		cbSelectionSort),
 	quickSortButton(
 		Point(GENERAL_H_W + GENERAL_H_W * 5, 9 * GENERAL_H_W),
 		BUTTON_W,
 		BUTTON_H,
 		"Quick Sort",
-		cb_quickSort),
+		cbQuickSort),
 	inputFileInput(
 		Point(GENERAL_X, GENERAL_H_W),
 		FILEINPUT_W,
@@ -78,21 +85,19 @@ MainWindow::MainWindow(Point xy, int w, int h, const string& title,bool cl) :
 	{
 		loopWindow();
 	}
-	
 }
 
-void MainWindow::cb_selectionSort(Address, Address pw)
+void MyWindow::cbSelectionSort(Address, Address pw)
 {
-	reference_to<MainWindow>(pw).selectionSortRun(true);
+	reference_to<MyWindow>(pw).selectionSortRun(true);
 }
 
-void MainWindow::cb_quickSort(Address, Address pw)
+void MyWindow::cbQuickSort(Address, Address pw)
 {
-	reference_to<MainWindow>(pw).quickSortRun(true);
+	reference_to<MyWindow>(pw).quickSortRun(true);
 }
 
-
-void MainWindow::loadFLights() {
+void MyWindow::loadFLights() {
 	//TODO citaj posle sranja
 	ifstream in(this->ip.getInputFilePath());
 	//ifstream in("../inputFileExample.txt");
@@ -129,11 +134,11 @@ void MainWindow::loadFLights() {
 	in.close();
 }
 
-void MainWindow::selectionSortRun(bool inside) {
+void MyWindow::selectionSortRun(bool inside) {
 	if (inside) {
 		createParameters();
 	}
-
+	flights.clear();
 	loadFLights();
 	SelectionSort ss = SelectionSort();
 	ss.resetNumCmps();
@@ -142,7 +147,7 @@ void MainWindow::selectionSortRun(bool inside) {
 	//selectionPushed = true;
 }
 
-void MainWindow::quickSortRun(bool inside) {
+void MyWindow::quickSortRun(bool inside) {
 	if (inside)
 	{
 		createParameters();
@@ -156,7 +161,7 @@ void MainWindow::quickSortRun(bool inside) {
 	//quickPushed = true;
 }
 
-void MainWindow::loopWindow() {
+void MyWindow::loopWindow() {
 	show();
 	while (true)
 	{
@@ -180,8 +185,7 @@ void MainWindow::loopWindow() {
 ../inputFileExample.txt s ../outputFileExample.txt 1 1 1 0
 */
 
-void MainWindow::createParameters() {
-
+void MyWindow::createParameters() {
 	vector<std::string> args;
 	char* argv[8];
 
@@ -194,10 +198,9 @@ void MainWindow::createParameters() {
 	ip.setInputFilePath(inputFileInput.get_string());
 	ip.setOutputFilePath(outputFileInput.get_string());
 	ip.guiGenerate(args);
-	
 }
 
-void MainWindow::generateOutput() {
+void MyWindow::generateOutput() {
 	if (ip.getOutputFilePath().empty())
 	{
 		return;
@@ -212,6 +215,6 @@ void MainWindow::generateOutput() {
 	out.close();
 }
 
-void MainWindow::setIp(InputParameters i) {
+void MyWindow::setIp(InputParameters i) {
 	this->ip = i;
 }

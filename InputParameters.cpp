@@ -1,8 +1,14 @@
+//============================================================================
+// Name        : InputParameters.cpp
+// Author      : Uros Stanic
+// Date        : 11.01.2021
+// Copyright   :
+// Description : Implementation of input parameters handler class
+//============================================================================
 #include "InputParmeters.h"
-#include "MainWindow.h"
+#include "MyWindow.h"
 
-
-InputParameters::InputParameters() : isSelectionSort(true),inputFilePath(""), outputFilePath("") {}
+InputParameters::InputParameters() : isSelectionSort(true), inputFilePath(""), outputFilePath("") {}
 
 void InputParameters::commandGenerate(int argc, char* argv[]) {
 	inputFilePath = argv[1];
@@ -15,9 +21,6 @@ void InputParameters::commandGenerate(int argc, char* argv[]) {
 	{
 		pr[i - 4] = argv[i];
 	}
-
-
-	
 
 	vector<std::string> priority;
 	bool ascending;
@@ -39,7 +42,6 @@ void InputParameters::commandGenerate(int argc, char* argv[]) {
 		codedPriority.push_back(i);
 	}
 
-
 	for (int i = 0; i < 3; i++)
 	{
 		for (int j = i + 1; j < 4; j++) {
@@ -59,17 +61,16 @@ void InputParameters::commandGenerate(int argc, char* argv[]) {
 	{
 		Flight::sortingParameterArray[i] = codedPriority[i];
 	}
-	if (argc>3)
+	if (argc > 3)
 	{
 		outputFilePath = argv[3];
 	}
 	this->setSortType(argv[2]);
-	
+
 	if (argc == 9)
 	{
 		Flight::ascendingSort = !(strcmp(argv[8], "false") == 0);
 	}
-
 }
 
 void InputParameters::guiGenerate(vector<std::string> argv) {
@@ -82,8 +83,6 @@ void InputParameters::guiGenerate(vector<std::string> argv) {
 		codedPriority.push_back(i);
 	}
 
-
-
 	for (int i = 0; i < 3; i++)
 	{
 		for (int j = i + 1; j < 4; j++) {
@@ -99,7 +98,7 @@ void InputParameters::guiGenerate(vector<std::string> argv) {
 			}
 		}
 	}
-	
+
 	for (int i = 0; i < 4; i++)
 	{
 		Flight::sortingParameterArray[i] = codedPriority[i];
@@ -107,10 +106,8 @@ void InputParameters::guiGenerate(vector<std::string> argv) {
 	Flight::ascendingSort = !(argv[4].compare("false") == 0);
 }
 
-void InputParameters::setSortType(std::string s){
-
+void InputParameters::setSortType(std::string s) {
 	isSelectionSort = (s.compare("q") != 0);
-
 }
 
 bool InputParameters::getIsSelectionSort() const {

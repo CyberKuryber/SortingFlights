@@ -1,3 +1,11 @@
+//============================================================================
+// Name        : SortCounter.h
+// Author      : Uros Stanic
+// Date        : 11.01.2022.
+// Copyright   :
+// Description : DrawingWindow class implementation
+//============================================================================
+
 #include "DrawingWindow.h"
 
 /*
@@ -31,9 +39,8 @@ void DrawingWindow::addElements(vector<Flight>& f) {
 			break;
 		}
 		//Out_box current(Point(currentX, currentY), 0, GENERAL_H, f[i].getFlightNum());
-		this->outs.push_back(new Out_box(Point(currentX, currentY), 0, GENERAL_H,	s ));
+		this->outs.push_back(new Out_box(Point(currentX, currentY), 0, GENERAL_H, s));
 		this->currentX += GENERAL_X;
-
 	}
 	while (!this->isNextButtonPushed() && !this->exitButtonPushed)
 	{
@@ -51,14 +58,13 @@ void DrawingWindow::newRow() {
 }
 
 void DrawingWindow::drawOuts() {
-
 	for (int i = 0; i < this->outs.size(); i++)
 	{
 		this->attach(*(this->outs[i]));
 	}
 
 	this->outs.clear();
-	
+
 	this->redraw();
 	this->nextButtonPushed = false;
 }
@@ -95,7 +101,6 @@ void DrawingWindow::exitButtonRun() {
 	exitButtonPushed = true;
 }
 
-
 void DrawingWindow::cb_next(Address, Address pw)
 {
 	reference_to<DrawingWindow>(pw).nextButtonRun();
@@ -124,7 +129,7 @@ bool DrawingWindow::isNextButtonPushed() {
 void DrawingWindow::addIterLable(int x) {
 	stringstream ss;
 	ss << x;
-	this->outs.push_back(new Out_box(Point(currentX, currentY), 0, GENERAL_H,ss.str()));
+	this->outs.push_back(new Out_box(Point(currentX, currentY), 0, GENERAL_H, ss.str()));
 	this->currentX += GENERAL_X;
 }
 void DrawingWindow::addCustomTextLabel(std::string text) {

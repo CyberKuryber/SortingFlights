@@ -35,15 +35,21 @@ public:
 	// main entry point
 	void sort(std::vector<Flight>& data);
 	void primarySort(std::vector<Flight>& data, bool sortOrder, DrawingWindow& dw, SortCounter& sortCounter);
+	~SelectionSort() {};
 };
 
 class QuickSort : public Sort
 {
 public:
+	//main entry point
 	void sort(std::vector<Flight>& data);
-	void primarySort(std::vector<Flight>& data, bool sortOrder, int first, int last, DrawingWindow& dw,SortCounter& sortCounter);
+	//recursive sort
+	void primarySort(std::vector<Flight>& data, bool sortOrder, int first, int last, DrawingWindow& dw, SortCounter& sortCounter);
+
 	int partition(std::vector<Flight>& data, bool sortOrder, int first, int last, SortCounter& sortCounter);
+	//choses random pivot
 	int rpartition(std::vector<Flight>& data, bool sortOrder, int first, int last, SortCounter& sortCounter);
+	~QuickSort() {};
 };
 
 /*

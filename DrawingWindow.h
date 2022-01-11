@@ -1,3 +1,10 @@
+//============================================================================
+// Name        : DrawingWindow.h
+// Author      : Uros Stanic
+// Date        : 11.01.2022.
+// Copyright   :
+// Description : DrawingWindow class definiton, it is window for visualisation
+//============================================================================
 #pragma once
 
 #define _USE_MATH_DEFINES
@@ -30,14 +37,22 @@ class DrawingWindow : public Window
 {
 public:
 	DrawingWindow(Point xy, int w, int h, const string& title);
+	//creates labels from flight vector
 	void addElements(vector<Flight>& f);
 	void generateGap();
+	//draws generated labels
 	void drawOuts();
+	//waits for button press
 	void loopWindow();
+	//creates new row for lables
 	void newRow();
+	//getter
 	bool isNextButtonPushed();
+	//creates label with int value
 	void addIterLable(int x);
+	//creates label with custom string
 	void addCustomTextLabel(std::string text);
+	~DrawingWindow() {};
 
 private:
 	int currentX;

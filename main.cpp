@@ -1,9 +1,9 @@
 //============================================================================
 // Name        : main.cpp
-// Author      :
-// Date        :
+// Author      :Uros Stanic
+// Date        :11.01.2022.
 // Copyright   :
-// Description :
+// Description :main program start
 //============================================================================
 
 #include <iostream>
@@ -14,8 +14,7 @@
 #include <regex>
 #include "Flight.h"
 #include "Sort.h"
-#include "MainWindow.h"
-
+#include "MyWindow.h"
 
 using namespace std;
 
@@ -30,7 +29,7 @@ using namespace std;
 void main(int argc, char* argv[])
 {
 	if (argc == 1) {
-		MainWindow mainWindow(Point(50, 50), WINDOW_W, WINDOW_H, "Sort Flights",false);
+		MyWindow mainWindow(Point(50, 50), WINDOW_W, WINDOW_H, "Sort Flights", false);
 	}
 	else if (argc < 3)
 	{
@@ -38,12 +37,10 @@ void main(int argc, char* argv[])
 		return;
 	}
 	else {
-		MainWindow mainWindow(Point(50, 50), WINDOW_W, WINDOW_H, "Sort Flights",true);
+		MyWindow mainWindow(Point(50, 50), WINDOW_W, WINDOW_H, "Sort Flights", true);
 		InputParameters ip;
 		ip.commandGenerate(argc, argv);
 		mainWindow.setIp(ip);
-
-
 
 		if (ip.getIsSelectionSort())
 		{
@@ -54,48 +51,4 @@ void main(int argc, char* argv[])
 			mainWindow.quickSortRun(false);
 		}
 	}
-	/*ifstream in("../inputFileExample.txt");
-	if (!in)
-	{
-		cerr << "ERROR: wrong input file name!";
-		exit(-1);
-	}
-
-	loadFlights(in);
-
-	/*SelectionSort ss = SelectionSort();
-	ss.sort(flights);
-	MergeSort ms = MergeSort();
-	ms.sort(flights);*/
-	cout << "WTF" << endl;
 }
-
-
-//args = ../inputFileExample.txt q ../outputFileExample.txt 1 1 1 0
-/*void loadFlights(ifstream& in)
-{
-	string line;
-	getline(in, line);
-	while (!in.eof())
-	{
-		int id;
-		string name;
-		string surname;
-
-		string line;
-		getline(in, line);
-		vector<string> tokens;
-		size_t pos = 0;
-		string delimiter = ";";
-		string token;
-
-		while ((pos = line.find(delimiter)) != std::string::npos) {
-			token = line.substr(0, pos);
-			token = std::regex_replace(token, std::regex("\\i"), "");
-			tokens.push_back(token);
-			line.erase(0, pos + delimiter.length());
-		}
-
-		flights.push_back(Flight(tokens[3], tokens[0], tokens[2], tokens[1]));
-	}
-}*/

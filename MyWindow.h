@@ -1,3 +1,11 @@
+//============================================================================
+// Name        : MyWindow.
+// Author      : Uros Stanic
+// Date        : 11.01.2021
+// Copyright   :
+// Description : Definiton of the MyWindow class
+//============================================================================
+
 #pragma once
 
 #define _USE_MATH_DEFINES
@@ -34,15 +42,15 @@
 
 using namespace Graph_lib;
 
-class MainWindow : public Window
+class MyWindow : public Window
 {
 public:
-	MainWindow(Point xy, int w, int h, const string& title, bool cl);
-	void loadFLights(string path);
+	MyWindow(Point xy, int w, int h, const string& title, bool cl);
+	//handles button run calls sort, creates new window
 	void quickSortRun(bool inside);
+	//handles button run calls sort, creates new window
 	void selectionSortRun(bool inside);
-	void createParameters(char* pr[], char* asc[]);
-	void generateOutput(string path);
+	//sets input parameters
 	void setIp(InputParameters i);
 
 private:
@@ -55,11 +63,16 @@ private:
 	bool selectionPushed;
 	bool quickPushed;
 
-	static void cb_selectionSort(Address, Address);
-	static void cb_quickSort(Address, Address);
+	//call back functions
+	static void cbSelectionSort(Address, Address);
+	static void cbQuickSort(Address, Address);
+	//loads from imput file
 	void loadFLights();
+	//waits for button press
 	void loopWindow();
+	//creates parametetrs
 	void createParameters();
+	//writes to output file
 	void generateOutput();
 
 	In_box outputFileInput;
@@ -70,4 +83,5 @@ private:
 	In_box gateNumPriorityTextBox;
 	In_box flightNumPriorityTextBox;
 	In_box AscendingTextBox;
+	~MyWindow() {};
 };
